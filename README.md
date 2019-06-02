@@ -20,4 +20,4 @@ This project should be runnable on a free [Heroku](http://www.heroku.com/) insta
 modification - just clone the reop and deploy to heroku. Or use the button below:
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nfriedly/nodeunblocker.com)
-
+[![Deploy to Bluemix](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/nfriedly/nodeunblocker.com)
