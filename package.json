@@ -4,7 +4,7 @@
   "author": "Nathan Friedly - http://nfriedly.com",
   "version": "1.0.0",
   "private": true,
-  "homepage": "http://nodeunblocker.com/",
+  "homepage": "https://github.com/nfriedly/nodeunblocker.com/",
   "dependencies": {
     "express": "^4.13.0",
     "gatling": "~1.2.0",
@@ -17,5 +17,6 @@
   },
   "scripts": {
     "start": "node ./node_modules/gatling/gatling.js ./app.js"
-  }
+  },
+  "license": "AGPL-3.0"
 }
