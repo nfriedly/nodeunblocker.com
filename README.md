@@ -1,4 +1,7 @@
 # nodeunblocker.com
+
+Evade internet censorship!
+
 The original nodeunblocker.com is now gone, but you can grab the code and deploy your own copy.
 
 The the core of the project has been extracted into a [standalone library](https://github.com/nfriedly/node-unblocker) to make it more flexible, but everything you need to run the website is right here.
