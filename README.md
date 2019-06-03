@@ -1,23 +1,26 @@
 # nodeunblocker.com
 The original nodeunblocker.com is now gone, but you can grab the code and deploy your own copy.
 
-The majority of the code has been moved to a standalone library: [node-unblocker](https://github.com/nfriedly/node-unblocker)
+The the core of the project has been extracted into a [standalone library](https://github.com/nfriedly/node-unblocker) to make it more flexible, but everything you need to run the website is right here.
 
 ## Running the website on your computer
 
-Requires [node.js](http://nodejs.org/) >= 6
-Then [download the code](https://github.com/nfriedly/nodeunblocker.com/archive/master.zip), unzip it, open up a terminal/command line
-`cd` into the directory,
-and run `npm install` to set things up.
-Then run `npm start` to start the server. It should spawn a new instance for each CPU core you have.
+1. Install [node.js](http://nodejs.org/)
+2. [Download the code](https://github.com/nfriedly/nodeunblocker.com/archive/master.zip)
+3. Unzip it
+4. Open up a terminal/command line
+5. `cd` into the directory
+6. Run `npm install` to grab the dependencies.
+7. Run `npm start` to start the server. It should spawn a new instance for each CPU core you have.
 
 (Note: running `node app.js` *will not work*. The server code is in the [Gatling](https://npmjs.org/package/gatling)
 package, which the `npm start` command calls automatically.)
 
+After that, it will be live on your computer and accessible from your computer at http://localhost:8080/ - accessing it from another computer is beyond the scope of this guide, but it is possible.
+
 ## Running the website on Heroku/Bluemix/Azure/AWS/etc
 
-This project should be runnable on a free [Heroku](http://www.heroku.com/) instance, as well as many other cloud providers, without
-modification: clone/download the code and deploy it, or just click one of the buttons below.
+This project should be runnable without modification on a free [Heroku](http://www.heroku.com/) instance, as well as many other cloud providers. Clone/download the code and deploy it, or just click one of the buttons below.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nfriedly/nodeunblocker.com)
 [![Deploy to Bluemix](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/nfriedly/nodeunblocker.com)
