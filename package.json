@@ -1,10 +1,10 @@
 {
-  "name": "nodeunblocker.com",
+  "name": "Shh..",
   "description": "Web proxy for evading internet censorship",
-  "author": "Nathan Friedly - http://nfriedly.com",
+  "author": "Rajas Gandhi - http://rajasgandhi.me",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://github.com/nfriedly/nodeunblocker.com/",
+  "homepage": "https://github.com/nsgamezz/unblocker/",
   "dependencies": {
     "express": "^4.13.0",
     "gatling": "~1.2.0",
