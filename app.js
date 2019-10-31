@@ -4,8 +4,16 @@ var express = require('express');
 var unblocker = require('unblocker');
 var Transform = require('stream').Transform;
 
+// Authentication module.
+var auth = require('http-auth');
+var basic = auth.basic({
+    realm: "Simon Area.",
+    file: __dirname + "./htpasswd"
+});
+ 
 // Setup server
 var app = express();
+app.use(auth.connect(basic));
 var server = require('http').createServer(app);
 
 var google_analytics_id = process.env.GA_ID || null;
@@ -45,6 +53,11 @@ app.get("/no-js", function(req, res) {
     var site = querystring.parse(url.parse(req.url).query).url;
     // and redirect the user to /proxy/url
     res.redirect(unblockerConfig.prefix + site);
+});
+
+// Setup route.
+app.get('/', (req, res) => {
+    res.send(`Hello from express - ${req.user}!`);
 });
 
 // for compatibility with gatlin and other servers, export the app rather than passing it directly to http.createServer
