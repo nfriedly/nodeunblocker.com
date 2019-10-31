@@ -1,74 +1,77 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Shh...</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="./main.css" />
-	</head>
-	<body>
-
-  <div class="container">
-  
-    <div class="main">
-  <h1>Secret Area</h1>
-      
-      <div id="error"></div>
-
-      <form action="no-js" method="get" id="unblocker-form">
-        <p>
-          URL: 
-          <input type="text" id="url" name="url" style="width:50%;" autofocus="autofocus" />
-          <input type="submit" value="Go" />
-        </p>
-
-      </form>
-  
-	    <p> </p>
-	    <p> </p>
-	    <p> </p>
-      <p>If you know what this is, you know what this is.</p>
-     
-
-    </div>
-  
-  </div>
-	<script>
-		function $(id){
-			return document.getElementById(id);
-		}
-		
-		$('unblocker-form').onsubmit = function(){
-			var url = $('url').value;
-			if(url.substr(0,4) != "http"){
-				url = "http://" + url;
-			}
-			window.location.pathname = 'proxy/' + url;
-			return false;
-		};
-		
-		function checkError(){
-			var search = window.location.search;
-			var start = search.indexOf('error=');
-			if(start > -1){
-				var stop = search.indexOf('&', start);
-				if(stop == -1){ stop = undefined; }
-				// +6 for "error="
-				var err = search.substr(start+6, stop);
-                var $error = $('error');
-				$error.innerText = $error.textContent = decodeURIComponent(err);
-				$error.style.display = "block";
-			}
-		}
-    
-		window.onload = function() { 
-			$('url').focus(); 
-			checkError(); 
-		}
-	</script>
-  
-		<!-- Scripts -->
-			<script src="./main.js"></script>
-  
-</body>
-</html>
+<? php
+echo '<!DOCTYPE HTML>';
+echo '<html>';
+echo '<head>';
+echo '<title>Shh...</title>';
+echo '<meta charset="utf-8" />';
+echo '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />';
+echo '<link rel="stylesheet" href="./main.css" />';
+echo '</head>';
+echo '<body>';
+echo '';
+echo '<div class="container">';
+echo '';
+echo '<div class="main">';
+echo '<h1>Secret Area</h1>';
+echo '';
+echo '<div id="error"></div>';
+echo '';
+echo '<form action="no-js" method="get" id="unblocker-form">';
+echo '<p>';
+echo 'URL:';
+echo '<input type="text" id="url" name="url" style="width:50%;" autofocus="autofocus" />';
+echo '<input type="submit" value="Go" />';
+echo '</p>';
+echo '';
+echo '</form>';
+echo '';
+echo '<p> </p>';
+echo '<p> </p>';
+echo '<p> </p>';
+echo '<p>If you know what this is, you know what this is.</p>';
+echo '';
+echo '';
+echo '</div>';
+echo '';
+echo '</div>';
+echo '<script>';
+echo 'function $(id){';
+echo 'return document.getElementById(id);';
+echo '}';
+echo '';
+echo '$('unblocker-form').onsubmit = function(){';
+echo 'var url = $('url').value;';
+echo 'if(url.substr(0,4) != "http"){';
+echo 'url = "http://" + url;';
+echo '}';
+echo 'window.location.pathname = 'proxy/' + url;';
+echo 'return false;';
+echo '};';
+echo '';
+echo 'function checkError(){';
+echo 'var search = window.location.search;';
+echo 'var start = search.indexOf('error=');';
+echo 'if(start > -1){';
+echo 'var stop = search.indexOf('&', start);';
+echo 'if(stop == -1){ stop = undefined; }';
+echo '// +6 for "error="';
+echo 'var err = search.substr(start+6, stop);';
+echo 'var $error = $('error');';
+echo '$error.innerText = $error.textContent = decodeURIComponent(err);';
+echo '$error.style.display = "block";';
+echo '}';
+echo '}';
+echo '';
+echo 'window.onload = function() {';
+echo '$('url').focus();';
+echo 'checkError();';
+echo '}';
+echo '</script>';
+echo '';
+echo '<!-- Scripts -->';
+echo '<script src="./main.js"></script>';
+echo '';
+echo '</body>';
+echo '</html>';
+echo '';
+?>
