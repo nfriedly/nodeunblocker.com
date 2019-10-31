@@ -1,3 +1,25 @@
+<?php
+session_start();
+
+if(isset($_POST['submit_pass']) && $_POST['pass'])
+{
+ $pass=$_POST['pass'];
+ if($pass=="123")
+ {
+  $_SESSION['password']=$pass;
+ }
+ else
+ {
+  $error="Incorrect Pssword";
+ }
+}
+
+if(isset($_POST['page_logout']))
+{
+ unset($_SESSION['password']);
+}
+?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -11,8 +33,11 @@
   <div class="container">
   
     <div class="main">
-  
-      <h1>Secret Area</h1>
+	    <?php
+if($_SESSION['password']=="123")
+{
+ ?>
+  <h1>Secret Area</h1>
       
       <div id="error"></div>
 
@@ -29,6 +54,20 @@
 	    <p> </p>
 	    <p> </p>
       <p>If you know what this is, you know what this is.</p>
+ <?php
+}
+else
+{
+ ?>
+ <form method="post" action="" id="login_form">
+  <h1>LOGIN TO PROCEED</h1>
+  <input type="password" name="pass" placeholder="*******">
+  <input type="submit" name="submit_pass" value="ENTER">
+  <p><font style="color:red;"><?php echo $error;?></font></p>
+ </form>
+ <?php	
+}
+?>
      
 
     </div>
