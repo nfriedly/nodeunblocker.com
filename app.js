@@ -3,8 +3,20 @@ var querystring = require('querystring');
 var express = require('express');
 var unblocker = require('unblocker');
 var Transform = require('stream').Transform;
+// HTTP Authentication 
+var preAuth = require('http-auth');
 
+var basic = preAuth.basic({
+        realm: "Restricted Access! Please login to proceed"
+    }, function (username, password, callback) { 
+         callback( (username === "user" && password === "password"));
+    }
+);
+
+// Setup server
 var app = express();
+    app.use(preAuth.connect(basic));
+var server = require('http').createServer(app);
 
 var google_analytics_id = process.env.GA_ID || null;
 
