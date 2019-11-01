@@ -10,7 +10,14 @@
     "gatling": "~1.2.0",
     "newrelic": "^1.20.2",
     "through": "^2.3.8",
-    "unblocker": "*"
+    "unblocker": "*",
+    "dotenv": "^8.0.0",
+    "express": "^4.15.2",
+    "http-auth": "^3.2.3"
+  },
+  "devDependencies": {
+    "request": "2.88.0",
+    "tape": "4.11.0"
   },
   "engines": {
     "node": ">=6"
