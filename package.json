@@ -14,7 +14,6 @@
   },
   "engines": {
     "node": ">=6",
-    "npm": ">=6"
   },
   "scripts": {
     "start": "node ./node_modules/gatling/gatling.js ./app.js"
