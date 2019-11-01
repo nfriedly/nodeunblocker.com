@@ -43,4 +43,6 @@ app.get('/', (req, res) => {
 });
 
 // for compatibility with gatlin and other servers, export the app rather than passing it directly to http.createServer
-module.exports = app;
+http.createServer(basic, (req, res) => {
+    res.end(`Welcome to private area - ${req.user}!`);
+}).listen(process.env.PORT);
