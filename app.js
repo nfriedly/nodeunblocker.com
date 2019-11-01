@@ -2,12 +2,12 @@ var url = require('url');
 var querystring = require('querystring');
 var unblocker = require('unblocker');
 var Transform = require('stream').Transform;
-const express = require('express');
-const auth = require('http-auth');
+var express = require('express');
+var auth = require('http-auth');
 
 require('dotenv').config();
 
-const basic = auth.basic({
+var basic = auth.basic({
         realm: "Private Area"
     }, (username, password, callback) => {
         callback(username === process.env.USER_NAME && password === process.env.USER_PASSW);
@@ -49,3 +49,5 @@ express()
   .use(auth.connect(basic))
   .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+modules.export = app;
