@@ -27,7 +27,7 @@ const PORT = process.env.PORT || 5000;
 var app = express();
 
 // this line must appear before any express.static calls (or anything else that sends responses)
-app.use(unblocker(unblockerConfig));
+//app.use(unblocker(unblockerConfig));
 
 app
   .use(auth.connect(basic))
