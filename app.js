@@ -7,30 +7,16 @@ var Transform = require('stream').Transform;
 // Authentication module.
 var auth = require('http-auth');
 var basic = auth.basic({
-    realm: "Simon Area.",
-    file: __dirname + "./htpasswd"
-});
- 
+		realm: "Simon Area."
+	}, (username, password, callback) => { 
+	    // Custom authentication
+	    // Use callback(error) if you want to throw async error.
+		callback(username === "Tina" && password === "Bullock");
+	}
+);
 // Setup server
 var app = express();
-app.use(auth.connect(basic));
 var server = require('http').createServer(app);
-
-var google_analytics_id = process.env.GA_ID || null;
-
-function googleAnalyticsMiddleware(data) {
-    if (data.contentType == 'text/html') {
-
-        // https://nodejs.org/api/stream.html#stream_transform
-        data.stream = data.stream.pipe(new Transform({
-            decodeStrings: false,
-            transform: function(chunk, encoding, next) {
-                this.push(addGa(chunk.toString()));
-                next();
-            }
-        }));
-    }
-}
 
 var unblockerConfig = {
     prefix: '/proxy/',
@@ -39,13 +25,13 @@ var unblockerConfig = {
     ]
 };
 
-
-
 // this line must appear before any express.static calls (or anything else that sends responses)
 app.use(unblocker(unblockerConfig));
 
 // serve up static files *after* the proxy is run
 app.use('/', express.static(__dirname + '/public'));
+
+app.use(auth.connect(basic));
 
 // this is for users who's form actually submitted due to JS being disabled or whatever
 app.get("/no-js", function(req, res) {
