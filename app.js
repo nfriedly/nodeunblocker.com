@@ -35,8 +35,8 @@ app.get("/no-js", function(req, res) {
 
 app
   .use(auth.connect(basic))
+  .use('/', express.static(__dirname + '/public'))
   .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
-  .use('/', express.static(__dirname + '/public'));
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 // serve up static files *after* the proxy is run
