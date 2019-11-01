@@ -1,26 +1,34 @@
 var url = require('url');
 var querystring = require('querystring');
-var express = require('express');
 var unblocker = require('unblocker');
 var Transform = require('stream').Transform;
+const express = require('express');
+const auth = require('http-auth');
 
-var auth = require('http-auth');
-var basic = auth.basic({
-        realm: "Simon Area."
-    }, (username, password, callback) => { 
-        // Custom authentication
-        // Use callback(error) if you want to throw async error.
-        callback(username === "Tina" && password === "Bullock");
+require('dotenv').config();
+
+const basic = auth.basic({
+        realm: "Private Area"
+    }, (username, password, callback) => {
+        callback(username === process.env.USER_NAME && password === process.env.USER_PASSW);
     }
 );
+
+basic.on('fail', (result, req) => {
+  console.log(`User authentication failed: ${result.user}`);
+});
+
+basic.on('error', (error, req) => {
+  console.log(`Authentication error: ${error.code + " - " + error.message}`);
+});
+
+const PORT = process.env.PORT || 5000;
 
 var app = express();
 
 var unblockerConfig = {
     prefix: '/proxy/'
 };
-
-app.use(auth.connect(basic));
 
 // this line must appear before any express.static calls (or anything else that sends responses)
 app.use(unblocker(unblockerConfig));
@@ -37,12 +45,7 @@ app.get("/no-js", function(req, res) {
     res.redirect(unblockerConfig.prefix + site);
 });
 
-// Setup route.
-app.get('/', (req, res) => {
-    res.send(`Hello from express - ${req.user}!`);
-});
-
-// for compatibility with gatlin and other servers, export the app rather than passing it directly to http.createServer
-http.createServer(basic, (req, res) => {
-    res.end(`Welcome to private area - ${req.user}!`);
-}).listen(process.env.PORT);
+express()
+  .use(auth.connect(basic))
+  .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
