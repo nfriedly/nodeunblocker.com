@@ -22,7 +22,7 @@ basic.on('error', (error, req) => {
   console.log(`Authentication error: ${error.code + " - " + error.message}`);
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT; //|| 5000;
 
 var app = express();
 
