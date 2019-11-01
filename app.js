@@ -14,10 +14,6 @@ var basic = auth.basic({
     }
 );
 
-basic.on('success', (result, req) => {
-    console.log(`User authenticated: ${result.user}`);
-});
-
 basic.on('fail', (result, req) => {
   console.log(`User authentication failed: ${result.user}`);
   process.exit();
@@ -36,6 +32,10 @@ var unblockerConfig = {
     prefix: '/proxy/'
 };
 
+app.use(auth.connect(basic));
+app.use(unblocker(unblockerConfig));
+app.use('/', express.static(__dirname + '/public'))
+
 app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
     var site = querystring.parse(url.parse(req.url).query).url;
@@ -43,13 +43,10 @@ app.get("/no-js", function(req, res) {
     res.redirect(unblockerConfig.prefix + site);
 });
 
-app
-  .use(auth.connect(basic))
-  //.use('/', express.static(__dirname + '/public'))
-  .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
+app.get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-  //.use(unblocker(unblockerConfig))
+  //
 
 /*const express = require('express');
 const auth = require('http-auth');
