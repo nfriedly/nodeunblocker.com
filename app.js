@@ -7,10 +7,7 @@ var Transform = require('stream').Transform;
 var app = express();
 
 var unblockerConfig = {
-    prefix: '/proxy/',
-    responseMiddleware: [
-        googleAnalyticsMiddleware
-    ]
+    prefix: '/proxy/'
 };
 
 // this line must appear before any express.static calls (or anything else that sends responses)
