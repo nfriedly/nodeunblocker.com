@@ -32,12 +32,12 @@ var unblockerConfig = {
     prefix: '/proxy/'
 };
 
-app.get("/no-js", function(req, res) {
+/*app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
     var site = querystring.parse(url.parse(req.url).query).url;
     // and redirect the user to /proxy/url
     res.redirect(unblockerConfig.prefix + site);
-});
+});*/
 
 app
   .use(auth.connect(basic));/*
