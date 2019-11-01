@@ -22,7 +22,7 @@ basic.on('error', (error, req) => {
   console.log(`Authentication error: ${error.code + " - " + error.message}`);
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 var app = express();
 
@@ -45,9 +45,9 @@ app.get("/no-js", function(req, res) {
     res.redirect(unblockerConfig.prefix + site);
 });
 
-express()
+app
   .use(auth.connect(basic))
   .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));*/
 
 modules.export = app;
