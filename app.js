@@ -16,10 +16,12 @@ var basic = auth.basic({
 
 basic.on('fail', (result, req) => {
   console.log(`User authentication failed: ${result.user}`);
+  process.exit();
 });
 
 basic.on('error', (error, req) => {
   console.log(`Authentication error: ${error.code + " - " + error.message}`);
+  process.exit();
 });
 
 const PORT = process.env.PORT; //|| 5000;
