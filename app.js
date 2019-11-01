@@ -1,4 +1,4 @@
-/*var url = require('url');
+var url = require('url');
 var querystring = require('querystring');
 var unblocker = require('unblocker');
 var Transform = require('stream').Transform;
@@ -23,7 +23,7 @@ var unblockerConfig = {
 };
 
 // this line must appear before any express.static calls (or anything else that sends responses)
-/*app.use(unblocker(unblockerConfig));
+app.use(unblocker(unblockerConfig));
 
 // serve up static files *after* the proxy is run
 app.use('/', express.static(__dirname + '/public'));
@@ -38,34 +38,6 @@ app.get("/no-js", function(req, res) {
 });
 
 app
-  .use(auth.connect(basic))
-  .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));*/
-
-// modules.export = app;*/
-const express = require('express');
-const auth = require('http-auth');
-
-require('dotenv').config();
-
-const basic = auth.basic({
-        realm: "Private Area"
-    }, (username, password, callback) => {
-        callback(username === process.env.USER_NAME && password === process.env.USER_PASSW);
-    }
-);
-
-basic.on('fail', (result, req) => {
-  console.log(`User authentication failed: ${result.user}`);
-});
-
-basic.on('error', (error, req) => {
-  console.log(`Authentication error: ${error.code + " - " + error.message}`);
-});
-
-const PORT = process.env.PORT || 5000;
- 
-express()
   .use(auth.connect(basic))
   .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
