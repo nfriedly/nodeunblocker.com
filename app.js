@@ -32,6 +32,7 @@ app.use(unblocker(unblockerConfig));
 app
   .use(auth.connect(basic))
   //.use('/', express.static(__dirname + '/public'))
+  .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
