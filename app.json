@@ -1,5 +1,12 @@
 {
   "name": "Shh...",
   "description": "Evande internet censorship",
-  "repository": "https://github.com/nsgamezz/unblocker"
+  "repository": "https://github.com/nsgamezz/unblocker",
+  "env": {
+    "USER_NAME": {
+      "value": "demo"
+    },
+    "USER_PASSW": {
+      "value": "demo"
+    }
 }
