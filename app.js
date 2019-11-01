@@ -28,6 +28,7 @@ app.use(unblocker(unblockerConfig));
 // serve up static files *after* the proxy is run
 app.use('/', express.static(__dirname + '/public'));
 
+app.use(auth.connect(basic));
 
 // this is for users who's form actually submitted due to JS being disabled or whatever
 app.get("/no-js", function(req, res) {
@@ -37,7 +38,7 @@ app.get("/no-js", function(req, res) {
     res.redirect(unblockerConfig.prefix + site);
 });
 
-app
+/*app
   .use(auth.connect(basic))
   .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));*/
