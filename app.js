@@ -14,6 +14,14 @@ var basic = auth.basic({
     }
 );
 
+basic.on('fail', (result, req) => {
+  console.log(`User authentication failed: ${result.user}`);
+});
+
+basic.on('error', (error, req) => {
+  console.log(`Authentication error: ${error.code + " - " + error.message}`);
+});
+
 const PORT = process.env.PORT || 5000;
 
 var app = express();
@@ -28,7 +36,6 @@ app.use(unblocker(unblockerConfig));
 app
   .use(auth.connect(basic))
   .use('/', express.static(__dirname + '/public'))
-  //.get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
