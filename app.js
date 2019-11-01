@@ -36,7 +36,7 @@ app
   .use(auth.connect(basic))
   .use(unblocker(unblockerConfig))
   .use('/', express.static(__dirname + '/public'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  //.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 // this is for users who's form actually submitted due to JS being disabled or whatever
 app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
