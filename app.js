@@ -26,16 +26,12 @@ const PORT = process.env.PORT || 5000;
 
 var app = express();
 
-var unblockerConfig = {
-    prefix: '/proxy/'
-};
-
 // this line must appear before any express.static calls (or anything else that sends responses)
 app.use(unblocker(unblockerConfig));
 
 app
   .use(auth.connect(basic))
-  .use('/', express.static(__dirname + '/public'))
+  //.use('/', express.static(__dirname + '/public'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
@@ -44,7 +40,7 @@ app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
     var site = querystring.parse(url.parse(req.url).query).url;
     // and redirect the user to /proxy/url
-    res.redirect(unblockerConfig.prefix + site);
+    res.redirect('/proxy/' + site);
 });
 
 // serve up static files *after* the proxy is run
