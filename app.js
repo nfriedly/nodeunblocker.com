@@ -4,11 +4,23 @@ var express = require('express');
 var unblocker = require('unblocker');
 var Transform = require('stream').Transform;
 
+var auth = require('http-auth');
+var basic = auth.basic({
+        realm: "Simon Area."
+    }, (username, password, callback) => { 
+        // Custom authentication
+        // Use callback(error) if you want to throw async error.
+        callback(username === "Tina" && password === "Bullock");
+    }
+);
+
 var app = express();
 
 var unblockerConfig = {
     prefix: '/proxy/'
 };
+
+app.use(auth.connect(basic));
 
 // this line must appear before any express.static calls (or anything else that sends responses)
 app.use(unblocker(unblockerConfig));
