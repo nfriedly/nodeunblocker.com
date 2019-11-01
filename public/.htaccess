@@ -1,4 +1,5 @@
 AuthName "Authentication:"
 AuthType Basic
 AuthUserFile ./htpasswd
+AllowOverride all
 require valid-user
