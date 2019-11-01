@@ -5,7 +5,6 @@ var unblocker = require('unblocker');
 var Transform = require('stream').Transform;
 
 var app = express();
-var server = require('http').createServer(app);
 
 var unblockerConfig = {
     prefix: '/proxy/',
