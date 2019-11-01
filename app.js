@@ -29,18 +29,18 @@ const PORT = process.env.PORT; //|| 5000;
 var app = express();
 
 // this line must appear before any express.static calls (or anything else that sends responses)
-//app.use(unblocker(unblockerConfig));
+app.use(unblocker(unblockerConfig));
 
 app
   .use(auth.connect(basic))
-  .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
+  .use('/', express.static(__dirname + '/public'));
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
 // this is for users who's form actually submitted due to JS being disabled or whatever
-/*app.get("/no-js", function(req, res) {
+app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
     var site = querystring.parse(url.parse(req.url).query).url;
     // and redirect the user to /proxy/url
     res.redirect('/proxy/' + site);
-});*/
+});
