@@ -36,12 +36,9 @@ app
 
 
 // this is for users who's form actually submitted due to JS being disabled or whatever
-app.get("/no-js", function(req, res) {
+/*app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
     var site = querystring.parse(url.parse(req.url).query).url;
     // and redirect the user to /proxy/url
     res.redirect('/proxy/' + site);
-});
-
-// serve up static files *after* the proxy is run
-//app.use('/', express.static(__dirname + '/public'));
+});*/
