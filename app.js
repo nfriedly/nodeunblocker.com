@@ -1,4 +1,4 @@
-var url = require('url');
+/*var url = require('url');
 var querystring = require('querystring');
 var unblocker = require('unblocker');
 var Transform = require('stream').Transform;
@@ -44,11 +44,9 @@ app.get("/no-js", function(req, res) {
 });
 
 app.get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));*/
 
-  //
-
-/*const express = require('express');
+const express = require('express');
 const auth = require('http-auth');
 
 require('dotenv').config();
