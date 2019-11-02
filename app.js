@@ -71,7 +71,7 @@ const PORT = process.env.PORT || 5000;
 express()
   .use(auth.connect(basic))
   .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));*/
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
 
