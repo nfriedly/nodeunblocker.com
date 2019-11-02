@@ -1,7 +1,6 @@
-/*var url = require('url');
+var url = require('url');
 var querystring = require('querystring');
 var unblocker = require('unblocker');
-var Transform = require('stream').Transform;
 var express = require('express');
 var auth = require('http-auth');
 
@@ -24,7 +23,7 @@ basic.on('error', (error, req) => {
   process.exit();
 });
 
-const PORT = process.env.PORT; //|| 5000;
+const PORT = process.env.PORT || 5000;
 
 var app = express();
 
@@ -32,9 +31,12 @@ var unblockerConfig = {
     prefix: '/proxy/'
 };
 
-app.use(auth.connect(basic));
-app.use(unblocker(unblockerConfig));
-app.use('/', express.static(__dirname + '/public'))
+app
+  .use(unblocker(unblockerConfig))
+  .use(auth.connect(basic))
+  .use('/', express.static(__dirname + '/public'))
+  .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
@@ -43,10 +45,7 @@ app.get("/no-js", function(req, res) {
     res.redirect(unblockerConfig.prefix + site);
 });
 
-app.get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));*/
-
-const express = require('express');
+/*const express = require('express');
 const auth = require('http-auth');
 
 require('dotenv').config();
@@ -71,7 +70,7 @@ const PORT = process.env.PORT || 5000;
 express()
   .use(auth.connect(basic))
   .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));*/
 
 
 
