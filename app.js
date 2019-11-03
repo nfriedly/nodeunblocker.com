@@ -36,12 +36,12 @@ app
   .use('/', express.static(__dirname + '/public'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-/*app.get("/no-js", function(req, res) {
+app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
     var site = querystring.parse(url.parse(req.url).query).url;
     // and redirect the user to /proxy/url
     res.redirect(unblockerConfig.prefix + site);
-});*/
+});
 
 /*const express = require('express');
 const auth = require('http-auth');
