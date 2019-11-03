@@ -32,9 +32,9 @@ var unblockerConfig = {
 
 app
   .use(auth.connect(basic))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   .use(unblocker(unblockerConfig))
-  .use('/', express.static(path.join(__dirname + '/public')))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  .use('/', express.static(__dirname + '/public'));
 
 app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
