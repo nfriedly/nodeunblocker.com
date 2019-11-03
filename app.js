@@ -33,7 +33,7 @@ var unblockerConfig = {
 app
   .use(auth.connect(basic))
   .use(unblocker(unblockerConfig))
-  .use('/', express.static(__dirname + '/public'))
+  .use('/', express.static(path.join(__dirname + '/public')))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 app.get("/no-js", function(req, res) {
