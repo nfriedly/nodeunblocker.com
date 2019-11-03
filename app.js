@@ -34,6 +34,7 @@ app
   .use(auth.connect(basic))
   .use(unblocker(unblockerConfig))
   .use('/', express.static(__dirname + '/public'))
+  .get( '/', (req, res) => res.send(`Welcome to private area - ${req.user}!`))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
