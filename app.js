@@ -43,7 +43,7 @@ app.get("/no-js", function(req, res) {
     res.redirect(unblockerConfig.prefix + site);
 });
 
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+//app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 /*const express = require('express');
 const auth = require('http-auth');
