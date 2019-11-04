@@ -34,9 +34,7 @@ app
   .use(auth.connect(basic))
   .use(unblocker(unblockerConfig))
   .use('/', express.static(__dirname + '/public'))
-  .get( '/', (req, res) => res.send(`Welcome to private area - ${req.user}!`))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-
+  .get('/', (req, res) => res.send(`Welcome to private area - ${req.user}!`));
 
 app.get("/no-js", function(req, res) {
     // grab the "url" parameter from the querystring
@@ -44,6 +42,8 @@ app.get("/no-js", function(req, res) {
     // and redirect the user to /proxy/url
     res.redirect(unblockerConfig.prefix + site);
 });
+
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 /*const express = require('express');
 const auth = require('http-auth');
