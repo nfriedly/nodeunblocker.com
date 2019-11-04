@@ -3,6 +3,7 @@ var querystring = require('querystring');
 var unblocker = require('unblocker');
 var express = require('express');
 var auth = require('http-auth');
+var session = require('express-session');    
 
 require('dotenv').config();
 
