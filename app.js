@@ -99,8 +99,8 @@ app.get("/no-js", function(req, res) {
 module.exports = app;
 
 
-app.use(session({
+/*app.use(session({
         resave : false,
         //httpOnly : true,
         cookie : { secure : false }
-}));
+}));*/
