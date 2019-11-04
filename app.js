@@ -1,4 +1,4 @@
-var url = require('url');
+/*var url = require('url');
 var querystring = require('querystring');
 var unblocker = require('unblocker');
 var express = require('express');
@@ -43,9 +43,9 @@ app.get("/no-js", function(req, res) {
     res.redirect(unblockerConfig.prefix + site);
 });
 
-//app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));*/
 
-/*const express = require('express');
+const express = require('express');
 const auth = require('http-auth');
 
 require('dotenv').config();
@@ -70,7 +70,7 @@ const PORT = process.env.PORT || 5000;
 express()
   .use(auth.connect(basic))
   .get('/', (req, res) => res.send(`Hello from express - ${req.user}!`))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));*/
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
 
