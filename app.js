@@ -74,7 +74,13 @@ config.responseMiddleware = [
     contentLength
 ];
 
-app.use(session({cookie : false});
+app.set('trust proxy', 1);
+
+app.use(session({
+        resave : false,
+        //httpOnly : true,
+        cookie : { secure : false }
+}));
 
 app
   .use(auth.connect(basic))
@@ -91,3 +97,10 @@ app.get("/no-js", function(req, res) {
 
 //app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 module.exports = app;
+
+/*
+app.use(session({
+        resave : false,
+        //httpOnly : true,
+        cookie : { secure : false }
+}));*/
