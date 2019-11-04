@@ -5,7 +5,6 @@
   "version": "1.0.0",
   "private": true,
   "homepage": "https://github.com/nsgamezz/unblocker/",
-  "main": "app.js",
   "dependencies": {
     "express": "^4.13.0",
     "gatling": "~1.2.0",
