@@ -73,6 +73,8 @@ config.responseMiddleware = [
     contentLength
 ];
 
+app.use(session({cookie : false});
+
 app
   .use(auth.connect(basic))
   .use(unblocker(config))
