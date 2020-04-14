@@ -9,10 +9,13 @@
  * Released under the terms of the Affero GPL v3
  */
 
+var http = require('http');
+var cluster = require('cluster');
+var numCPUs = require('os').cpus().length;
 var url = require('url');
 var querystring = require('querystring');
 var express = require('express');
-var unblocker = require('unblocker');
+var Unblocker = require('unblocker');
 var Transform = require('stream').Transform;
 
 var app = express();
@@ -59,10 +62,10 @@ var unblockerConfig = {
     ]
 };
 
-
+var unblocker = Unblocker(unblockerConfig)
 
 // this line must appear before any express.static calls (or anything else that sends responses)
-app.use(unblocker(unblockerConfig));
+app.use(unblocker);
 
 // serve up static files *after* the proxy is run
 app.use('/', express.static(__dirname + '/public'));
@@ -75,5 +78,35 @@ app.get("/no-js", function(req, res) {
     res.redirect(unblockerConfig.prefix + site);
 });
 
-// for compatibility with gatlin and other servers, export the app rather than passing it directly to http.createServer
-module.exports = app;
+// start one process per cpu core + one master process
+if (cluster.isMaster) {
+    console.log('Master nodeunblocker.com process is running with pid', process.pid);
+
+    // Fork workers.
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+        console.log('worker died, pid was', worker.process.pid);
+        // start a new worker in 10 seconds, unless all workers are dead, then exit
+        setTimeout(function() {
+            if (numCPUs > 1 && Object.keys(cluster.workers).length > 0) {
+                cluster.fork();
+            } else {
+                console.log('all workers have died, exiting');
+                process.exit(code);
+            }
+        }, 10 * 1000);
+    });
+} else {
+    // Workers can share any TCP connection
+    // In this case it is an HTTP server
+    var server = http.createServer(app);
+
+    server.listen(process.env.PORT || 3000);
+
+    server.on('upgrade', unblocker.onUpgrade);
+
+    console.log('nodeunblocker.com worker process started with pid', process.pid);
+}
