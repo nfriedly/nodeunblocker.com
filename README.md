@@ -2,7 +2,7 @@
 
 Evade internet censorship!
 
-The original nodeunblocker.com is now gone, but it's now easier than ever to deploy your own copy.
+The original nodeunblocker.com is gone, but it's now easier than ever to deploy your own copy.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nfriedly/nodeunblocker.com)
 [![Deploy to Bluemix](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/nfriedly/nodeunblocker.com)
