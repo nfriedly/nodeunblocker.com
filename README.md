@@ -9,6 +9,15 @@ The original nodeunblocker.com is gone, but it's now easier than ever to deploy 
 [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 [![Deploy to AWS](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/nfriedly/nodeunblocker.com)
 
+## Now with YouTube support (sort of)
+
+I went ahead and included the youtube example, it replaces youtube.com video pages with a custom page that just streams the video (but actually works). 
+
+To disable it just add `//` to the beginning of this line of code in app.js:
+
+```js
+youtube.processRequest
+```
 
 ## Running the website on your computer
 
