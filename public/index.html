@@ -114,7 +114,7 @@
 			if(url.substr(0,4) != "http"){
 				url = "http://" + url;
 			}
-			window.location.pathname = 'proxy/' + url;
+			window.location = location.protocol + '//' + location.host + '/proxy/' + url;
 			return false;
 		};
 		
