@@ -4,9 +4,7 @@ Evade internet censorship!
 
 The original nodeunblocker.com is gone, but it's now easier than ever to deploy your own copy.
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nfriedly/nodeunblocker.com)
 [![Deploy to Bluemix](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/nfriedly/nodeunblocker.com)
-[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 [![Deploy to AWS](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/nfriedly/nodeunblocker.com)
 
 ## Now with YouTube support (sort of)
@@ -34,9 +32,9 @@ package, which the `npm start` command calls automatically.)
 
 After that, it will be live on your computer and accessible from your computer at http://localhost:8080/ - accessing it from another computer is beyond the scope of this guide, but it is possible.
 
-## Running the website on Heroku/Bluemix/Azure/AWS/etc
+## Running the website on ~~Heroku~~/Bluemix/Azure/AWS/etc
 
-This project should be runnable without modification on a free [Heroku](http://www.heroku.com/) instance, as well as many other cloud providers. Clone/download the code and deploy it, or just click one of the buttons above.
+This project should be runnable without modification on many cloud providers. Clone/download the code and deploy it, or just click one of the buttons above. (I used to use heroku, but they have since updated changed their policies to not allow it.)
 
 # About the project
 
