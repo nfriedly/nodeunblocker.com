@@ -23,18 +23,17 @@ var google_analytics_id = process.env.GA_ID || null;
 function addGa(html) {
     if (google_analytics_id) {
         var ga = [
-            "<script type=\"text/javascript\">",
-            "var _gaq = []; // overwrite the existing one, if any",
-            "_gaq.push(['_setAccount', '" + google_analytics_id + "']);",
-            "_gaq.push(['_trackPageview']);",
-            "(function() {",
-            "  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;",
-            "  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';",
-            "  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);",
-            "})();",
-            "</script>"
-            ].join("\n");
-        html = html.replace("</body>", ga + "\n\n</body>");
+			"<!-- Google tag (gtag.js) -->",
+			"<script async src=\"https://www.googletagmanager.com/gtag/js?id=" + google_analytics_id + "\"></script>",
+			"<script>",
+			"  window.dataLayer = window.dataLayer || [];",
+			"  function gtag(){dataLayer.push(arguments);}",
+			"  gtag('js', new Date());",
+			"\n",
+			"  gtag('config', " + google_analytics_id + ");",
+			"</script>"
+			].join("\n");
+        html = html.replace("<head>", "<head>\n\n" + ga);
     }
     return html;
 }
@@ -53,13 +52,58 @@ function googleAnalyticsMiddleware(data) {
     }
 }
 
+function forceUpgrade(html) {
+    var meta = [
+		"<meta http-equiv=\"Content-Security-Policy\" content=\"upgrade-insecure-requests\">"
+		].join("\n");
+    html = html.replace("</head>", meta + "\n\n</head>");
+    return html;
+}
+
+function forceHttpsUpgradeMiddleware(data) {
+    if (data.contentType == 'text/html') {
+
+        // https://nodejs.org/api/stream.html#stream_transform
+        data.stream = data.stream.pipe(new Transform({
+            decodeStrings: false,
+            transform: function(chunk, encoding, next) {
+                this.push(forceUpgrade(chunk.toString()));
+                next();
+            }
+        }));
+    }
+}
+
+function tetrioPatch(html) {
+    var meta = [
+		"<meta http-equiv=\"Content-Security-Policy\" content=\"upgrade-insecure-requests\">"
+		].join("\n");
+    html = html.replace("<meta name=googlebot content=notranslate>", "<meta name=googlebot content=notranslate>\n\n" + meta);
+    return html;
+}
+
+function tetrioPatchMiddleware(data) {
+    if (data.contentType == 'text/html') {
+
+        // https://nodejs.org/api/stream.html#stream_transform
+        data.stream = data.stream.pipe(new Transform({
+            decodeStrings: false,
+            transform: function(chunk, encoding, next) {
+                this.push(tetrioPatch(chunk.toString()));
+                next();
+            }
+        }));
+    }
+}
+
 var unblocker = new Unblocker({
     prefix: '/proxy/',
     requestMiddleware: [
         youtube.processRequest
     ],
     responseMiddleware: [
-        googleAnalyticsMiddleware
+        googleAnalyticsMiddleware,
+		tetrioPatch
     ]
 });
 
