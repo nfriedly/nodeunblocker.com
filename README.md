@@ -9,6 +9,18 @@ The original nodeunblocker.com is gone, but it's now easier than ever to deploy 
 [![Deploy to Cyclic](https://deploy.cyclic.sh/button.svg)](https://deploy.cyclic.sh/)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnfriedly%2Fnodeunblocker.com)
 
+## Now with tetr.io support
+
+Added a fix for tetr.io when running over reverse proxy or any tunneling service
+
+To disable it just add `//` to the beginning of [this line of code in app.js](https://github.com/nfriedly/nodeunblocker.com/blob/5355bbfa8cfe2b5d2e6e5aae41ea21936a3be9a5/app.js#L106) like so:
+
+```js
+//        tetrioPatch
+```
+
+Also fixed Analytics Api to newest Analytics 4
+
 ## Now with YouTube support (sort of)
 
 I went ahead and activated the [youtube example](https://github.com/nfriedly/node-unblocker/blob/master/examples/youtube/youtube.js), it replaces youtube.com video pages with a custom page that just streams the video (but actually works). 
