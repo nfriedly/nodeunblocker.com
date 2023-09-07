@@ -111,8 +111,8 @@
 		
 		$('unblocker-form').onsubmit = function(){
 			var url = $('url').value;
-			if(url.substr(0,4) != "http"){
-				url = "http://" + url;
+			if(url.substr(0,4) != "http" && url.substr(0,5) != "https"){
+				url = "https://google.com/search?q=" + encodeURIComponent(url);
 			}
 			window.location = location.protocol + '//' + location.host + '/proxy/' + url;
 			return false;
