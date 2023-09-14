@@ -212,10 +212,11 @@
     $('unblocker-form').onsubmit = function () {
       var url = $('url').value;
       if (url.substr(0, 4) != "http") {
-        let urlRegex = new RegExp(`(\w+:?\w*)?([\w.-]+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?`);
-        if (urlRegex.test(url)) {
+        // url heuristic: if it has at least one dot and doesn't have any spaces, assume it's a url that just omitted the protocol
+        if (url.includes('.') && !url.includes(' ')) {
           url = "https://" + url;
-        }
+        } else
+        
         url = "https://google.com/search?q=" + encodeURIComponent(url);
       }
       window.location = location.protocol + '//' + location.host + '/proxy/' + url;
