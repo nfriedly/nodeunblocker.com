@@ -211,7 +211,7 @@
 
     $('unblocker-form').onsubmit = function () {
       var url = $('url').value;
-      if (url.substr(0, 4) != "http" && url.substr(0, 5) != "https") {
+      if (url.substr(0, 4) != "http") {
         let urlRegex = new RegExp(`(\w+:?\w*)?([\w.-]+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?`);
         if (urlRegex.test(url)) {
           url = "https://" + url;
