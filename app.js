@@ -53,7 +53,7 @@ function googleAnalyticsMiddleware(data) {
     }
 }
 
-var unblocker = new Unblocker({
+var unblockerConfig = {
     prefix: '/proxy/',
     requestMiddleware: [
         youtube.processRequest
@@ -61,7 +61,9 @@ var unblocker = new Unblocker({
     responseMiddleware: [
         googleAnalyticsMiddleware
     ]
-});
+};
+
+var unblocker = new Unblocker(unblockerConfig);
 
 // this line must appear before any express.static calls (or anything else that sends responses)
 app.use(unblocker);
