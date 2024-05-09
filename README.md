@@ -34,7 +34,7 @@ package, which the `npm start` command calls automatically.)
 
 After that, it will be live on your computer and accessible from your computer at http://localhost:8080/ - accessing it from another computer is beyond the scope of this guide, but it is possible.
 
-## Running the website on ~~Heroku~~/Bluemix/Azure/AWS/etc
+## Running the website on Bluemix/Azure/AWS/etc
 
 This project should be runnable without modification on many cloud providers. Clone/download the code and deploy it, or just click one of the buttons above. (I used to use heroku, but they have since updated changed their policies to not allow it.)
 
