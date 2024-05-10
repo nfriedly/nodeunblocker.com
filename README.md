@@ -13,7 +13,7 @@ The original nodeunblocker.com is gone, but it's now easier than ever to deploy 
 
 I went ahead and activated the [youtube example](https://github.com/nfriedly/node-unblocker/blob/master/examples/youtube/youtube.js), it replaces youtube.com video pages with a custom page that just streams the video (but actually works). 
 
-To disable it just add `//` to the beginning of [this line of code in app.js](https://github.com/nfriedly/nodeunblocker.com/blob/5355bbfa8cfe2b5d2e6e5aae41ea21936a3be9a5/app.js#L59) like so:
+To disable it just add `//` to the beginning of [this line of code in app.js](https://github.com/nfriedly/nodeunblocker.com/blob/29342cd97fc687f115c65e3e17c9be755b5beaf9/app.js#L59) like so:
 
 ```js
 //        youtube.processRequest
@@ -29,14 +29,14 @@ To disable it just add `//` to the beginning of [this line of code in app.js](ht
 6. Run `npm install` to grab the dependencies.
 7. Run `npm start` to start the server. It should spawn a new instance for each CPU core you have.
 
-(Note: running `node app.js` *will not work*. The server code is in the [Gatling](https://npmjs.org/package/gatling)
-package, which the `npm start` command calls automatically.)
+(Note: running `node app.js` will start up a single worker, whereas `npm start` will start up multiple workers and a watchdog process via the [Gatling](https://npmjs.org/package/gatling)
+package.)
 
 After that, it will be live on your computer and accessible from your computer at http://localhost:8080/ - accessing it from another computer is beyond the scope of this guide, but it is possible.
 
 ## Running the website on Bluemix/Azure/AWS/etc
 
-This project should be runnable without modification on many cloud providers. Clone/download the code and deploy it, or just click one of the buttons above. (I used to use heroku, but they have since updated changed their policies to not allow it.)
+This project should be runnable without modification on many cloud providers. Clone/download the code and deploy it, or just click one of the buttons above. (I used to use heroku, but they have since changed their policies to not allow it.)
 
 # About the project
 
